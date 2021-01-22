@@ -46,12 +46,12 @@ print(WORKBOOK.get_sheet_by_name(SHEET_SELECT))
 print("checkpoint 3")
 #iter through rows and columns per sheet for key(SHA256 hash) values (hash, file name, cylance score, status) . 
 #row = tuple / use type for more info on what you can do with a tuple consider the fact that unpacking tuples will be required. 
-def get_hashes_list(SHEET_SELECTED): 
+def get_hashes_list(SHEET_SELECTED):
     for row in SHEET_SELECTED.iter_rows(min_row=2,
         max_row=1000000,
         min_col=1,
         values_only=False): # False = ReadOnlyCell object True = limited values default is False.  
-   
+        
         # assuming row is a tuple of ReadOnlyCell objects (see openpyxl docs), return object at index 11 (column = 'SHA2565') and index 3 (column = 'File Name') 
         # and index 15 ('cylance score) and index 5 ('files status')
         SHAHASH = row[11]
@@ -66,7 +66,7 @@ def get_hashes_list(SHEET_SELECTED):
             break 
  
         
-
+print("checkpoint 4")
 # this is the functional code to search for the hash in SHAHASH variable and return the fields from the dict of nested dicts that we care about.  
 # hash.row == file name.row will relate these things in logic see docs @ https://openpyxl.readthedocs.io/en/stable/_modules/openpyxl/cell/read_only.html
 def VT_APICALL(SHEET_SELECTED):
@@ -95,7 +95,7 @@ def VT_APICALL(SHEET_SELECTED):
                         pass
                             
                                 
-
+print("checkpoint 5")
 def DETERMINATION_VALUE(SHEET_SELECTED):         
         for HASH, OUTPUT in ITEMS_SEEN.items():
                 if HASH not in MAL_RESULTS.keys(): 
@@ -108,6 +108,7 @@ def DETERMINATION_VALUE(SHEET_SELECTED):
                         MAL_RESULTS[HASH] = 'Quarantined'
                  
 
+print("checkpoint 6")
 def WRITE_COLUMNA(SHEET_SELECTED):                                  
         for HASH, OUTPUT in MAL_RESULTS.items(): 
                 if MAL_RESULTS.keys() == SHEET_SELECTED.iter_cols(min_col=11,max_col=11,min_row=1,max_row=None):  
@@ -128,6 +129,7 @@ def WRITE_COLUMNA(SHEET_SELECTED):
                 # proof code works to update dict with nested dicts for values inside. 
                 #print(SHEET_SELECTED['A'])
 
+print("checkpoint 7")
 def main():  
        get_hashes_list(SHEET_SELECTED)
        VT_APICALL(SHEET_SELECTED)
@@ -138,7 +140,8 @@ def main():
        
        #WRITE_COLUMNA(SHEET_SELECTED)
        
-      
+print("checkpoint 8")    
 if __name__ == "__main__": 
         main()
  
+print("checkpoint 9")
